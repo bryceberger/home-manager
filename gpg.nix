@@ -1,0 +1,19 @@
+{ config, pkgs, lib, ... }:
+let
+  pinentry = pkgs.pinentry.override { enabledFlavors = [ "tty" ]; };
+in
+{
+  home.file = {
+    ".gnupg/gpg-agent.conf".text = ''
+      pinentry-program ${pinentry}/bin/pinentry
+    '';
+  };
+
+  programs.gpg = {
+    enable = true;
+    settings = {
+      default-key = "FDBF801F1CE5FB66EC3075C058CA4F9FEF8F4296";
+      use-agent = true;
+    };
+  };
+}

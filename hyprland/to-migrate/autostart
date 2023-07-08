@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# variables
+config=$HOME/.config/hypr
+scripts=$config/scripts
+
+waybar &
+hyprpaper &
+
+# other
+dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP &
+hyprctl setcursor Catppuccin-Mocha-Light-Cursors 24
+swayidle &
