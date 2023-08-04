@@ -1,24 +1,22 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, ... }:
 let
-  playerctl_metadata_cmd = "playerctl -a metadata --format '{\"text\": \"{{playerName}}: {{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"mediaplayer\"}' -F";
+  playerctl_metadata_cmd = "${pkgs.playerctl}/bin/playerctl -a metadata --format '{\"text\": \"{{playerName}}: {{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"mediaplayer\"}' -F";
   cssColor = vals: pkgs.lib.foldlAttrs (acc: name: value: acc + "@define-color ${name} ${toString value};\n") "" vals;
+
+  waybar-hyprland = pkgs.waybar.overrideAttrs (oldAttrs: {
+    mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+    postPatch = ''
+      # use hyprctl to switch workspaces
+      sed -i 's|zext_workspace_handle_v1_activate(workspace_handle_);|const std::string command = "${pkgs.hyprland}/bin/hyprctl dispatch workspace " + name_;\n\tsystem(command.c_str());|g' src/modules/wlr/workspace_manager.cpp
+    '';
+  });
 in
 {
   programs.waybar = {
     enable = true;
-    package = pkgs.waybar.overrideAttrs (oldAttrs: {
-      mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-      postPatch = ''
-        # use hyprctl to switch workspaces
-        sed -i 's/zext_workspace_handle_v1_activate(workspace_handle_);/const std::string command = "hyprctl dispatch workspace " + name_;\n\tsystem(command.c_str());/g' src/modules/wlr/workspace_manager.cpp
-      '';
-      postFixup = ''
-        wrapProgram $out/bin/waybar \
-          --suffix PATH : ${lib.makeBinPath [ pkgs.hyprland ]}
-      '';
-    });
+    package = waybar-hyprland;
 
-    settings = {
+    settings = with pkgs; {
       topBar = {
         layer = "top";
         position = "top";
@@ -40,7 +38,7 @@ in
           return-type = "json";
           max-length = 70;
           exec = playerctl_metadata_cmd;
-          on-click = "playerctl previous";
+          on-click = "${playerctl}/bin/playerctl previous";
         };
         "custom/media" = {
           format = "{icon}";
@@ -51,14 +49,14 @@ in
           };
           max-length = 70;
           exec = playerctl_metadata_cmd;
-          on-click = "playerctl play-pause";
+          on-click = "${playerctl}/bin/playerctl play-pause";
         };
         "custom/mediaright" = {
           format = " ";
           return-type = "json";
           max-length = 70;
           exec = playerctl_metadata_cmd;
-          on-click = "playerctl next";
+          on-click = "${playerctl}/bin/playerctl next";
         };
 
         "wlr/workspaces" = {
@@ -76,8 +74,9 @@ in
           format-muted = " {volume:2}%";
           format-icons = [ "" "" ];
           scroll-step = 0;
+          # TODO: what package is wpctl in?
           on-click = "wpctl set-mute @DEFAULT_SINK@ toggle";
-          on-click-right = "pavucontrol";
+          on-click-right = "${pavucontrol}/bin/pavucontrol";
         };
 
         temperature = {

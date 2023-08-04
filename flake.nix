@@ -10,23 +10,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     helix-typst = {
       url = "github:AlexanderBrevig/helix/feat/add-typst";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
   };
 
   outputs =
     { nixpkgs
     , nix-std
     , home-manager
-    , hyprland
     , helix-typst
     , ...
     }:
@@ -40,13 +33,12 @@
       homeConfigurations."bryce" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
-          hyprland.homeManagerModules.default
           ./janus.nix
         ];
         extraSpecialArgs = {
           inherit
             nix-std system
-            hyprland helix-typst
+            helix-typst
             ;
         };
       };
