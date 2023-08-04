@@ -20,10 +20,17 @@
       merge.conflictstyle = "zdiff3";
       diff.colorMoved = "default";
 
+      diff = {
+        tool = "kitty";
+      };
+      difftool."kitty" = {
+        cmd = "kitty +kitten diff $LOCAL $REMOTE";
+      };
+
       delta = {
         navigate = true;
         syntax-theme = "Catppuccin-mocha";
-        side-by-side = true;
+        # side-by-side = true;
         features = "custom-theme";
 
         custom-theme = {

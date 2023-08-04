@@ -7,7 +7,7 @@
 
   home.packages = with pkgs; [
     grc # colors
-    exa
+    lsd
     ripgrep
 
     # to not have to run fish again after nix-shell
@@ -74,7 +74,7 @@
       "la" = "ls -a";
       "ll" = "ls -l";
       "gh" = "git log --oneline --graph --all -n 20";
-      "gd" = "git diff";
+      "gd" = "git difftool --no-symlinks --dir-diff";
       "c" = "cargo";
       "nd" = ''nix develop -c fish'';
     };
@@ -82,7 +82,7 @@
     shellAliases = {
       "icat" = "kitty +kitten icat";
       "whl" = "Hyprland";
-      "ls" = "exa";
+      "ls" = "lsd";
     };
   };
 }

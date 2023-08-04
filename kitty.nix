@@ -17,4 +17,8 @@
 
     theme = "Catppuccin-Mocha";
   };
+
+  xdg.configFile = {
+    "kitty/diff.conf".source = ./kitty/diff.conf;
+  };
 }

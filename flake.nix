@@ -3,20 +3,33 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
+    nix-std.url = "github:chessai/nix-std";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.05";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    nix-std.url = "github:chessai/nix-std";
+    helix-typst = {
+      url = "github:AlexanderBrevig/helix/feat/add-typst";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    helix-typst.url = "github:AlexanderBrevig/helix/feat/add-typst";
   };
 
-  outputs = { nixpkgs, nix-std, home-manager, hyprland, helix-typst, ... }:
+  outputs =
+    { nixpkgs
+    , nix-std
+    , home-manager
+    , hyprland
+    , helix-typst
+    , ...
+    }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -30,7 +43,12 @@
           hyprland.homeManagerModules.default
           ./janus.nix
         ];
-        extraSpecialArgs = { inherit nix-std hyprland helix-typst; };
+        extraSpecialArgs = {
+          inherit
+            nix-std system
+            hyprland helix-typst
+            ;
+        };
       };
     };
 }

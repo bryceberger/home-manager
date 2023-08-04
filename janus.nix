@@ -27,8 +27,7 @@
 
   home.packages = with pkgs; [
     libnotify
-    (callPackage /home/bryce/todo-riir/unit-calculator {})
-    minecraft
+    yuzu
   ];
 
   programs.home-manager.enable = true;
