@@ -14,6 +14,12 @@ let std = nix-std.lib; in
   };
 
   xdg.configFile = {
+    "helix/languages.toml".text = std.serde.toTOML {
+      language = [{
+        name = "cpp";
+        indent = { tab-width = 4; unit = "\t"; };
+      }];
+    };
     "helix/config.toml".text = std.serde.toTOML {
       theme = "catppuccin_mocha";
 

@@ -76,7 +76,8 @@
       "gh" = "git log --oneline --graph --all -n 20";
       "gd" = "git difftool --no-symlinks --dir-diff";
       "c" = "cargo";
-      "nd" = ''nix develop -c fish'';
+      "nd" = "nix develop -c fish";
+      "pbuds" = "bluetoothctl connect 74:74:46:26:7D:09";
     };
 
     shellAliases = {

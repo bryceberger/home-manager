@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, ... }:
 {
   programs.kitty = {
     enable = true;
@@ -11,7 +11,8 @@
     };
 
     keybindings = {
-      "f3" = "launch --cwd=current --type=os-window --os-window-class=floatingkitty";
+      "f3" = "launch --cwd=current --type=os-window";
+      "f4" = "launch --cwd=current --type=os-window --os-window-class=floatingkitty";
       "ctrl+alt+plus" = "change_font_size current 12.0";
     };
 

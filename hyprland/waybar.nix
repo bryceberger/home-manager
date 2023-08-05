@@ -31,7 +31,50 @@ in
           "custom/mediaright"
           "pulseaudio"
           "temperature"
+          "custom/fan"
+          "network"
+          "battery"
         ];
+
+        battery = {
+          states = {
+            good = 90;
+            warning = 50;
+            critical = 25;
+          };
+          format = "{icon} {capacity}%";
+          format-alt = "{time}";
+          format-icons = [
+            ""
+            ""
+            ""
+            ""
+            ""
+          ];
+        };
+
+        network = {
+          format = "{ifname}";
+          format-wifi = " {essid} ({signalStrength}%)";
+          format-ethernet = " {ipaddr}/{cidr}";
+          on-click = "kitty --class floatingkitty --detach nmtui";
+        };
+
+
+        "custom/fan" = {
+          exec = "echo {\\\"alt\\\":\\\"$(asusctl profile -p | grep -oE '[^ ]+$')\\\", \\\"tooltip\\\":\\\"$(asusctl profile -p | grep -oE '[^ ]+$')\\\"}";
+          return-type = "json";
+          interval = "once";
+          exec-on-event = true;
+          on-click = "asusctl profile -n";
+          format = "{icon}";
+          format-icons = {
+            Performance = "";
+            Balanced = "";
+            Quiet = "";
+          };
+        };
+
 
         "custom/medialeft" = {
           format = "  ";
@@ -80,7 +123,7 @@ in
         };
 
         temperature = {
-          hwmon-path = "/sys/class/hwmon/hwmon2/temp1_input";
+          hwmon-path = "/sys/class/hwmon/hwmon4/temp1_input";
           format = "{temperatureC}°C";
           format-alt = "{temperatureF}°F";
         };
@@ -137,11 +180,21 @@ in
       #custom-media,
       #custom-mediaright,
       #pulseaudio,
-      #temperature {
+      #temperature,
+      #custom-fan,
+      #network
+      #battery {
         color: @text;
-        margin: 0 5px;
+        margin: 0 6px;
         padding: 0 5px;
         background: @base;
+      }
+
+      #network {
+        margin: 0 10 0 5px;
+      }
+      #battery {
+        margin: 0 15 0 5px;
       }
 
       #clock {

@@ -1,4 +1,9 @@
 { pkgs }:
+let
+  backlight = "${pkgs.brightnessctl}/bin/brightnessctl";
+  volume = "${pkgs.wireplumber}/bin/wpctl";
+  media = "${pkgs.playerctl}/bin/playerctl";
+in
 {
   bind = with pkgs; [
     "SUPER     , M     , exit, "
@@ -6,12 +11,11 @@
     "SUPERSHIFT, S     , exec, screenshot"
   ]
   # movement
-  ++ builtins.concatLists (
-    map
-      (x: [
-        ("CTRL," + x + ",workspace," + x)
-        ("CTRLSHIFT," + x + ",movetoworkspace," + x)
-      ]) [ "1" "2" "3" "4" "5" "6" "7" "8" "9" ]
+  ++ builtins.concatLists (map
+    (x: [
+      ("CTRL," + x + ",workspace," + x)
+      ("CTRLSHIFT," + x + ",movetoworkspace," + x)
+    ]) [ "1" "2" "3" "4" "5" "6" "7" "8" "9" ]
   )
   ++ [
     "CTRL     , Q     , killactive     , "
@@ -45,23 +49,20 @@
     "ALT      , space , exec, ${fuzzel}/bin/fuzzel"
 
     # brightness
-    # TODO: add this on laptop
-    # ",XF86MonBrightnessDown,exec,xbacklight -dec 10"
-    # ",F7,exec,xbacklight -dec 10"
-    # ",XF86MonBrightnessUp,exec,xbacklight -inc 10"
-    # ",F8,exec,xbacklight -inc 10"
-    # ",XF86KbdBrightnessDown,exec,xbacklight -ctrl asus::kbd_backlight -dec 30"
-    # ",XF86KbdBrightnessUp,exec,xbacklight -ctrl asus::kbd_backlight -inc 30"
-    # "SUPER,space,exec,kbdbacklighttoggle"
+    "     , XF86MonBrightnessDown, exec, ${backlight} s 10%-"
+    "     , F7                   , exec, ${backlight} s 10%-"
+    "     , XF86MonBrightnessUp  , exec, ${backlight} s 10%+"
+    "     , F8                   , exec, ${backlight} s 10%+"
+    "SUPER, space                , exec, kbdbacklighttoggle"
 
     # audio / media
     # TODO: what package is wpctl in?
-    ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_SINK@ 5%+"
-    ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_SINK@ 5%-"
-    ", XF86AudioMute       , exec, wpctl set-sink-mute @DEFAULT_SINK@ toggle"
-    ", XF86AudioPlay       , exec, ${playerctl}/bin/playerctl play-pause"
-    ", XF86AudioPause      , exec, ${playerctl}/bin/playerctl play-pause"
-    ", XF86AudioNext       , exec, ${playerctl}/bin/playerctl next"
-    ", XF86AudioPrevious   , exec, ${playerctl}/bin/playerctl previous"
+    ", XF86AudioRaiseVolume, exec, ${volume} set-volume @DEFAULT_SINK@ 5%+"
+    ", XF86AudioLowerVolume, exec, ${volume} set-volume @DEFAULT_SINK@ 5%-"
+    ", XF86AudioMute       , exec, ${volume} set-sink-mute @DEFAULT_SINK@ toggle"
+    ", XF86AudioPlay       , exec, ${media} play-pause"
+    ", XF86AudioPause      , exec, ${media} play-pause"
+    ", XF86AudioNext       , exec, ${media} next"
+    ", XF86AudioPrevious   , exec, ${media} previous"
   ];
 }

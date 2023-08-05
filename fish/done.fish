@@ -86,7 +86,7 @@ function done_end --on-event fish_prompt
             end
 
             notify-send --hint=int:transient:1 --urgency=$urgency --icon=utilities-terminal --app-name=fish "$title" "$message"
-            echo "$title" "$message"
+            # echo "$title" "$message"
         end
     end
 end
