@@ -19,6 +19,7 @@ let std = nix-std.lib; in
         name = "cpp";
         indent = { tab-width = 4; unit = "\t"; };
       }];
+      language-server.typst-lsp.config.exportPdf = "Never";
     };
     "helix/config.toml".text = std.serde.toTOML {
       theme = "catppuccin_mocha";
