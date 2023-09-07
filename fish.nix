@@ -74,10 +74,10 @@
       "la" = "ls -a";
       "ll" = "ls -l";
       "gh" = "git log --oneline --graph --all -n 20";
-      "gd" = "git difftool --no-symlinks --dir-diff";
+      "gd" = "git difftool --dir-diff";
       "c" = "cargo";
       "nd" = "nix develop -c fish";
-      "pbuds" = "bluetoothctl connect 74:74:46:26:7D:09";
+      "pbuds" = "bluetoothctl connect 24:29:34:9C:5D:8D";
     };
 
     shellAliases = {

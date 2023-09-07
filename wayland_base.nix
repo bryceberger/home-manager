@@ -15,7 +15,7 @@
     swaynotificationcenter
 
     (writeShellScriptBin "lock" ''
-      ${pkgs.swaylock-effects}/bin/swaylock --grace 1 --fade-in 1 -S --clock --font "Fira Code" --effect-blur 5x5 --effect-pixelate 10
+      ${pkgs.swaylock}/bin/swaylock -c 1e1e2eff
     '')
   ];
 

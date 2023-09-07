@@ -8,13 +8,17 @@
   wayland.windowManager.hyprland = {
     enable = true;
 
-    settings = { }
-      // import ./hyprland/decoration.nix { }
-      // import ./hyprland/input.nix { }
-      // import ./hyprland/keybinds.nix { inherit pkgs; }
-      // import ./hyprland/monitors.nix { }
-      // import ./hyprland/themes/mocha.nix { }
-      // import ./hyprland/window_rules.nix { }
+    settings = {
+      misc = {
+        disable_hyprland_logo = true;
+      };
+    }
+    // import ./hyprland/decoration.nix { }
+    // import ./hyprland/input.nix { }
+    // import ./hyprland/keybinds.nix { inherit pkgs; }
+    // import ./hyprland/monitors.nix { }
+    // import ./hyprland/themes/mocha.nix { }
+    // import ./hyprland/window_rules.nix { }
     ;
 
     extraConfig = with pkgs; ''

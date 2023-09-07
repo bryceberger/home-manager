@@ -1,8 +1,10 @@
 {}:
 {
   decoration = {
-    blur = false;
     drop_shadow = false;
+    blur = {
+      enabled = false;
+    };
   };
 
   general = {
