@@ -9,6 +9,7 @@
     ./helix.nix
     ./hyprland.nix
     ./kitty.nix
+    ./scripts.nix
     ./sway.nix
     ./utils.nix
   ];
@@ -26,13 +27,27 @@
   home.stateVersion = "23.05"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
-    libnotify
+    calibre
     eternal-terminal
+    libnotify
+    calc.packages.${system}.default
     power-graphing.packages.${system}.default
+    (writeShellScriptBin "nix_remote" ''
+      remote=ssh-ng://janus
+      result=result
+      target=$1
+
+      store_path=`nix build --eval-store auto --store $remote --json $target | ${jq}/bin/jq -r '.[0].outputs.out'`
+
+      nix copy --from $remote $store_path
+      ln -sfn $store_path $result
+    '')
+    (writeShellScriptBin "mount_kindle" ''
+      mount $1 $2 -o umask=0022,gid=100,uid=1000
+    '')
     (writeShellScriptBin "hist" ''
       power-graphing $@ && ${inkscape}/bin/inkview /tmp/out.svg 2>/dev/null &
     '')
-    calc.packages.${system}.default
     (writeShellScriptBin "kbdbacklighttoggle" ''
       bl=${pkgs.brightnessctl}/bin/brightnessctl
       kb=asus::kbd_backlight

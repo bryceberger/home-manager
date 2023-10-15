@@ -21,7 +21,7 @@ in
         layer = "top";
         position = "top";
 
-        modules-left = [ "wlr/workspaces" ];
+        modules-left = [ "hyprland/workspaces" ];
 
         modules-center = [ "clock" ];
 
@@ -123,7 +123,7 @@ in
         };
 
         temperature = {
-          hwmon-path = "/sys/class/hwmon/hwmon4/temp1_input";
+          hwmon-path = "/sys/class/hwmon/hwmon1/temp1_input";
           format = "{temperatureC}°C";
           format-alt = "{temperatureF}°F";
         };
@@ -191,10 +191,12 @@ in
       }
 
       #network {
-        margin: 0 10 0 5px;
+        color: @text;
+        margin: 0 10px 0 5px;
       }
       #battery {
-        margin: 0 15 0 5px;
+        color: @text;
+        margin: 0 15px 0 5px;
       }
 
       #clock {

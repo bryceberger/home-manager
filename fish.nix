@@ -78,6 +78,7 @@
       "c" = "cargo";
       "nd" = "nix develop -c fish";
       "pbuds" = "bluetoothctl connect 24:29:34:9C:5D:8D";
+      "nr" = "nix_remote";
     };
 
     shellAliases = {

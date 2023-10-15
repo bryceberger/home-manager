@@ -6,6 +6,8 @@ in
   home.file = {
     ".gnupg/gpg-agent.conf".text = ''
       pinentry-program ${pinentry}/bin/pinentry
+      default-cache-ttl 34560000
+      max-cache-ttl 34560000
     '';
   };
 
