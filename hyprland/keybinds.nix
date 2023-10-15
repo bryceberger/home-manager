@@ -42,8 +42,8 @@ in
     "         , F11   , fullscreen"
 
     # common programs
-    "CTRL     , Return, exec, ${kitty}/bin/kitty --single-instance"
-    "CTRLSHIFT, Return, exec, ${kitty}/bin/kitty --single-instance --class floatingkitty"
+    "CTRL     , Return, exec, ${kitty}/bin/kitty"
+    "CTRLSHIFT, Return, exec, ${kitty}/bin/kitty --class floatingkitty"
     "SUPER    , W     , exec, ${firefox}/bin/firefox"
     "SUPER    , Z     , exec, ${zathura}/bin/zathura"
     "ALT      , space , exec, ${fuzzel}/bin/fuzzel"

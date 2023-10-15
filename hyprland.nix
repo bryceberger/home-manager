@@ -32,7 +32,7 @@
         ${swayidle}/bin/swayidle &
       ''}/bin/hyprland-autostart
 
-      bind   = CTRLSHIFT, escape, submap, clean
+      bind   = CTRLSHIFT, escape, submap, clear
       submap = clear
       bind   =          , escape, submap, reset
       submap = reset

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, calc, system, ... }:
 {
   imports = [
     ./common.nix
@@ -26,7 +26,12 @@
   home.stateVersion = "23.05"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
+    calc.packages.${system}.default
+    calibre
+    citra-nightly
     libnotify
+    retroarchFull
+    waypipe
     yuzu
   ];
 

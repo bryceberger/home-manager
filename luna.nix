@@ -42,9 +42,6 @@
       nix copy --from $remote $store_path
       ln -sfn $store_path $result
     '')
-    (writeShellScriptBin "mount_kindle" ''
-      mount $1 $2 -o umask=0022,gid=100,uid=1000
-    '')
     (writeShellScriptBin "hist" ''
       power-graphing $@ && ${inkscape}/bin/inkview /tmp/out.svg 2>/dev/null &
     '')
