@@ -26,6 +26,9 @@
       difftool."kitty" = {
         cmd = "kitty +kitten diff $LOCAL $REMOTE";
       };
+      difftool."difft" = {
+        cmd = "${pkgs.difftastic}/bin/difft --color always $LOCAL $REMOTE | ${pkgs.delta}/bin/delta";
+      };
 
       delta = {
         navigate = true;

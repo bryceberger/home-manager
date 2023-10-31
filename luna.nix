@@ -30,6 +30,8 @@
     calibre
     eternal-terminal
     libnotify
+    mpv
+    yt-dlp
     calc.packages.${system}.default
     power-graphing.packages.${system}.default
     (writeShellScriptBin "nix_remote" ''
