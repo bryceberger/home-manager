@@ -11,6 +11,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    helix = {
+      url = "github:helix-editor/helix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
+      };
+    };
+
     power-graphing = {
       url = "path:/home/bryce/rust/power";
       inputs = {
@@ -31,6 +39,7 @@
     nixpkgs,
     nix-std,
     home-manager,
+    helix,
     power-graphing,
     calc,
     ...
@@ -49,6 +58,7 @@
         inherit
           nix-std
           system
+          helix
           power-graphing
           calc
           ;

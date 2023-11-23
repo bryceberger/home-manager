@@ -1,6 +1,8 @@
 {
   pkgs,
   nix-std,
+  helix,
+  system,
   ...
 }: let
   std = nix-std.lib;
@@ -11,7 +13,10 @@ in {
     alejandra
   ];
 
-  programs.helix.enable = true;
+  programs.helix = {
+    enable = true;
+    package = helix.packages.${system}.helix;
+  };
 
   xdg.configFile = {
     "helix/languages.toml".text = std.serde.toTOML {
