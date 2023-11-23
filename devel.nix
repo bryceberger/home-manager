@@ -1,12 +1,10 @@
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   clang-format-text = args:
     pkgs.lib.foldlAttrs
-      (acc: name: value: acc + "${name}: ${toString value}\n")
-      ""
-      args;
-in
-{
+    (acc: name: value: acc + "${name}: ${toString value}\n")
+    ""
+    args;
+in {
   home.file = {
     ".clang-format".text = clang-format-text {
       BasedOnStyle = "Google";

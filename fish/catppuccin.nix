@@ -1,6 +1,6 @@
-{ pkgs, ... }:
-let fish = import ./mod.nix { inherit pkgs; }; in
-{
+{pkgs, ...}: let
+  fish = import ./mod.nix {inherit pkgs;};
+in {
   xdg.configFile = {
     "fish/conf.d/00-colors.fish".text = fish.setVars {
       # Catppuccin color palette

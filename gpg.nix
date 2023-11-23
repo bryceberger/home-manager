@@ -1,8 +1,11 @@
-{ config, pkgs, lib, ... }:
-let
-  pinentry = pkgs.pinentry.override { enabledFlavors = [ "tty" ]; };
-in
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
+  pinentry = pkgs.pinentry.override {enabledFlavors = ["tty"];};
+in {
   home.file = {
     ".gnupg/gpg-agent.conf".text = ''
       pinentry-program ${pinentry}/bin/pinentry

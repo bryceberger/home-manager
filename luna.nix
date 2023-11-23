@@ -1,5 +1,10 @@
-{ pkgs, power-graphing, calc, system, ... }:
 {
+  pkgs,
+  power-graphing,
+  calc,
+  system,
+  ...
+}: {
   imports = [
     ./common.nix
     ./devel.nix

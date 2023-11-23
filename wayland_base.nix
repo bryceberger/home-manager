@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   imports = [
     ./wayland_base/theme.nix
     ./desktop_base.nix

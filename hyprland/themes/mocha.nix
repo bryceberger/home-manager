@@ -1,5 +1,4 @@
-{}:
-let
+{}: let
   rosewater = "0xfff5e0dc";
   flamingo = "0xfff2cdcd";
   pink = "0xfff5c2e7";
@@ -25,8 +24,7 @@ let
   base = "0xff1e1e2e";
   mantle = "0xff181825";
   crust = "0xff11111b";
-in
-{
+in {
   "$rosewater" = "${rosewater}";
   "$flamingo" = "${flamingo}";
   "$pink" = "${pink}";

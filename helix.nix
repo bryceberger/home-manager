@@ -1,9 +1,14 @@
-{ pkgs, nix-std, ... }:
-let std = nix-std.lib; in
 {
-home.packages = with pkgs; [
+  pkgs,
+  nix-std,
+  ...
+}: let
+  std = nix-std.lib;
+in {
+  home.packages = with pkgs; [
     # extra lanugage servers
-    nil alejandra
+    nil
+    alejandra
   ];
 
   programs.helix.enable = true;
@@ -13,11 +18,14 @@ home.packages = with pkgs; [
       language = [
         {
           name = "cpp";
-          indent = { tab-width = 4; unit = "    "; };
+          indent = {
+            tab-width = 4;
+            unit = "    ";
+          };
         }
         {
           name = "verilog";
-          language-servers = [ "svls" ];
+          language-servers = ["svls"];
         }
         {
           name = "nix";
@@ -45,7 +53,7 @@ home.packages = with pkgs; [
         color-modes = true;
         cursorline = true;
         file-picker.hidden = true;
-        gutters = [ "diagnostics" "diff" "line-numbers" "spacer" ];
+        gutters = ["diagnostics" "diff" "line-numbers" "spacer"];
         indent-guides.render = true;
         line-number = "relative";
         true-color = true;

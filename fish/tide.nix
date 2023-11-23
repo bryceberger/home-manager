@@ -1,6 +1,6 @@
-{ pkgs, ... }:
-let fish = import ./mod.nix { inherit pkgs; }; in
-{
+{pkgs, ...}: let
+  fish = import ./mod.nix {inherit pkgs;};
+in {
   xdg.configFile = {
     "fish/conf.d/02-tide-vars.fish".text = fish.setVars {
       tide_aws_bg_color = "normal";

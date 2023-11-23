@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   imports = [
     ./fish/catppuccin.nix
     ./fish/tide.nix
@@ -63,11 +62,22 @@
     '';
 
     plugins = with pkgs.fishPlugins; [
-      { name = "grc"; src = grc.src; }
-      { name = "autopair"; src = autopair.src; }
-      { name = "tide"; src = tide.src; }
-      # { name = "done"; src = done.src; }
-      { name = "git"; src = plugin-git.src; }
+      {
+        name = "grc";
+        src = grc.src;
+      }
+      {
+        name = "autopair";
+        src = autopair.src;
+      }
+      {
+        name = "tide";
+        src = tide.src;
+      }
+      {
+        name = "git";
+        src = plugin-git.src;
+      }
     ];
 
     shellAbbrs = {

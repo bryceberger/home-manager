@@ -1,17 +1,19 @@
-{ config, pkgs, ... }:
-let
+{
+  config,
+  pkgs,
+  ...
+}: let
   playerctl_metadata_cmd = "${pkgs.playerctl}/bin/playerctl -a metadata --format '{\"text\": \"{{playerName}}: {{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"mediaplayer\"}' -F";
   cssColor = vals: pkgs.lib.foldlAttrs (acc: name: value: acc + "@define-color ${name} ${toString value};\n") "" vals;
 
   waybar-hyprland = pkgs.waybar.overrideAttrs (oldAttrs: {
-    mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+    mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true"];
     postPatch = ''
       # use hyprctl to switch workspaces
       sed -i 's|zext_workspace_handle_v1_activate(workspace_handle_);|const std::string command = "${pkgs.hyprland}/bin/hyprctl dispatch workspace " + name_;\n\tsystem(command.c_str());|g' src/modules/wlr/workspace_manager.cpp
     '';
   });
-in
-{
+in {
   programs.waybar = {
     enable = true;
     package = waybar-hyprland;
@@ -21,9 +23,9 @@ in
         layer = "top";
         position = "top";
 
-        modules-left = [ "hyprland/workspaces" ];
+        modules-left = ["hyprland/workspaces"];
 
-        modules-center = [ "clock" ];
+        modules-center = ["clock"];
 
         modules-right = [
           "custom/medialeft"
@@ -60,7 +62,6 @@ in
           on-click = "kitty --class floatingkitty --detach nmtui";
         };
 
-
         "custom/fan" = {
           exec = "echo {\\\"alt\\\":\\\"$(asusctl profile -p | grep -oE '[^ ]+$')\\\", \\\"tooltip\\\":\\\"$(asusctl profile -p | grep -oE '[^ ]+$')\\\"}";
           return-type = "json";
@@ -74,7 +75,6 @@ in
             Quiet = "";
           };
         };
-
 
         "custom/medialeft" = {
           format = "  ";
@@ -115,7 +115,7 @@ in
         pulseaudio = {
           format = "{icon} {volume:2}%";
           format-muted = " {volume:2}%";
-          format-icons = [ "" "" ];
+          format-icons = ["" ""];
           scroll-step = 0;
           # TODO: what package is wpctl in?
           on-click = "wpctl set-mute @DEFAULT_SINK@ toggle";

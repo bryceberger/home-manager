@@ -27,32 +27,32 @@
     };
   };
 
-  outputs =
-    { nixpkgs
-    , nix-std
-    , home-manager
-    , power-graphing
-    , calc
-    , ...
-    }:
-    let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-    in
-    {
-      formatter.${system} = pkgs.nixpkgs-fmt;
+  outputs = {
+    nixpkgs,
+    nix-std,
+    home-manager,
+    power-graphing,
+    calc,
+    ...
+  }: let
+    system = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${system};
+  in {
+    formatter.${system} = pkgs.alejandra;
 
-      homeConfigurations."bryce" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [
-          ./luna.nix
-        ];
-        extraSpecialArgs = {
-          inherit
-            nix-std system
-            power-graphing calc
-            ;
-        };
+    homeConfigurations."bryce" = home-manager.lib.homeManagerConfiguration {
+      inherit pkgs;
+      modules = [
+        ./luna.nix
+      ];
+      extraSpecialArgs = {
+        inherit
+          nix-std
+          system
+          power-graphing
+          calc
+          ;
       };
     };
+  };
 }

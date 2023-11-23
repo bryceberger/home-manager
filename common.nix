@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   home.sessionVariables = {
     EDITOR = "hx";
   };

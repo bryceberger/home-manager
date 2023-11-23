@@ -1,5 +1,9 @@
-{ pkgs, calc, system, ... }:
 {
+  pkgs,
+  calc,
+  system,
+  ...
+}: {
   imports = [
     ./common.nix
     ./devel.nix

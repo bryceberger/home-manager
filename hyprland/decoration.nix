@@ -1,5 +1,4 @@
-{}:
-{
+{}: {
   decoration = {
     drop_shadow = false;
     blur = {

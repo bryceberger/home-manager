@@ -1,5 +1,4 @@
-{}:
-{
+{}: {
   windowrule = [
     "float       , org.gnome.Nautilus"
     "move 100 100, org.gnome.Nautilus"

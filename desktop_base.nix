@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   imports = [
     ./kitty.nix
   ];
@@ -8,7 +7,7 @@
 
   home.packages = with pkgs; [
     fira-code
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    (nerdfonts.override {fonts = ["FiraCode"];})
 
     # standalone
     firefox
