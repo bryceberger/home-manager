@@ -1,6 +1,4 @@
 {
-  description = "Home Manager configuration of bryce";
-
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nix-std.url = "github:chessai/nix-std";
@@ -13,10 +11,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    helix-typst = {
-      url = "github:AlexanderBrevig/helix/feat/add-typst";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     power-graphing = {
       url = "path:/home/bryce/rust/power";
       inputs = {
@@ -37,7 +31,6 @@
     { nixpkgs
     , nix-std
     , home-manager
-    , helix-typst
     , power-graphing
     , calc
     , ...
@@ -57,7 +50,6 @@
         extraSpecialArgs = {
           inherit
             nix-std system
-            helix-typst
             power-graphing calc
             ;
         };

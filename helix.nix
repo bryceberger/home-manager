@@ -1,25 +1,40 @@
-{ pkgs, nix-std, helix-typst, ... }:
+{ pkgs, nix-std, ... }:
 let std = nix-std.lib; in
 {
-  home.packages = with pkgs; [
+home.packages = with pkgs; [
     # extra lanugage servers
-    # typst typst-lsp # not updated in home manager
-    zathura
-    nil
+    nil alejandra
   ];
 
-  programs.helix = {
-    enable = true;
-    package = helix-typst.packages."x86_64-linux".helix;
-  };
+  programs.helix.enable = true;
 
   xdg.configFile = {
     "helix/languages.toml".text = std.serde.toTOML {
-      language = [{
-        name = "cpp";
-        indent = { tab-width = 4; unit = "    "; };
-      }];
-      language-server.typst-lsp.config.exportPdf = "never";
+      language = [
+        {
+          name = "cpp";
+          indent = { tab-width = 4; unit = "    "; };
+        }
+        {
+          name = "verilog";
+          language-servers = [ "svls" ];
+        }
+        {
+          name = "nix";
+          auto-format = true;
+          formatter = {
+            command = "alejandra";
+            args = ["-q"];
+          };
+        }
+      ];
+
+      language-server.typst-lsp = {
+        command = "typst-lsp";
+        config.exportPdf = "never";
+      };
+
+      language-server.svls.command = "svls";
     };
     "helix/config.toml".text = std.serde.toTOML {
       theme = "catppuccin_mocha";
@@ -33,7 +48,6 @@ let std = nix-std.lib; in
         gutters = [ "diagnostics" "diff" "line-numbers" "spacer" ];
         indent-guides.render = true;
         line-number = "relative";
-        soft-wrap.enable = true;
         true-color = true;
         cursor-shape = {
           insert = "bar";

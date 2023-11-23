@@ -12,6 +12,7 @@
 
     # standalone
     firefox
+    zathura
 
     # sound
     pavucontrol

@@ -1,6 +1,5 @@
-{ nix-std, pkgs, ... }:
+{ pkgs, ... }:
 let
-  std = nix-std.lib;
   clang-format-text = args:
     pkgs.lib.foldlAttrs
       (acc: name: value: acc + "${name}: ${toString value}\n")
@@ -9,10 +8,6 @@ let
 in
 {
   home.file = {
-    ".cargo/config.toml".text = std.serde.toTOML {
-      registries.crates-io = { protocol = "sparse"; };
-    };
-
     ".clang-format".text = clang-format-text {
       BasedOnStyle = "Google";
       IndentWidth = 4;
@@ -26,7 +21,6 @@ in
       BinPackParameters = "false";
       BreakConstructorInitializers = "BeforeComma";
       AlignOperands = "DontAlign";
-      # BinPackArguments = "false";
     };
   };
 }
