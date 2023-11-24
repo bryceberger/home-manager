@@ -88,7 +88,6 @@
     '')
   ];
 
-  programs.home-manager.enable = true;
   services.swayidle.enable = true;
 
   xdg.configFile = {

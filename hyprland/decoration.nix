@@ -9,8 +9,6 @@
   general = {
     "col.inactive_border" = "$mantle";
     "col.active_border" = "$border";
-    "col.group_border_active" = "$rosewater";
-    "col.group_border" = "$mantle";
 
     border_size = 2;
     gaps_in = 0;

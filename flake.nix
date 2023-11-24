@@ -46,23 +46,22 @@
   }: let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
+
+    username = "bryce";
+    extraModules = { inherit nix-std system helix power-graphing calc;};
   in {
     formatter.${system} = pkgs.alejandra;
 
-    homeConfigurations."bryce" = home-manager.lib.homeManagerConfiguration {
+    homeConfigurations."${username}@luna" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      modules = [
-        ./luna.nix
-      ];
-      extraSpecialArgs = {
-        inherit
-          nix-std
-          system
-          helix
-          power-graphing
-          calc
-          ;
-      };
+      extraSpecialArgs = extraModules;
+      modules = [ ./luna.nix ];
+    };
+
+    homeConfigurations."${username}@janus" = home-manager.lib.homeManagerConfiguration {
+      inherit pkgs;
+      extraSpecialArgs = extraModules;
+      modules = [ ./janus.nix ];
     };
   };
 }

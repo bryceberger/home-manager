@@ -14,6 +14,7 @@
     ./hyprland.nix
     ./kitty.nix
     ./sway.nix
+    ./scripts.nix
     ./utils.nix
   ];
 
@@ -38,6 +39,4 @@
     waypipe
     yuzu
   ];
-
-  programs.home-manager.enable = true;
 }
