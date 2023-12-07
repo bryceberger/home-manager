@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  hostname,
   ...
 }: {
   imports = [
@@ -19,8 +20,8 @@
       }
       // import ./hyprland/decoration.nix {}
       // import ./hyprland/input.nix {}
-      // import ./hyprland/keybinds.nix {inherit pkgs;}
-      // import ./hyprland/monitors.nix {}
+      // import ./hyprland/keybinds.nix {inherit pkgs hostname;}
+      // import ./hyprland/monitors.nix {inherit hostname;}
       // import ./hyprland/themes/mocha.nix {}
       // import ./hyprland/window_rules.nix {};
 

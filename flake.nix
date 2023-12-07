@@ -48,20 +48,20 @@
     pkgs = nixpkgs.legacyPackages.${system};
 
     username = "bryce";
-    extraModules = { inherit nix-std system helix power-graphing calc;};
+    extraModules = {inherit nix-std system helix power-graphing calc;};
   in {
     formatter.${system} = pkgs.alejandra;
 
     homeConfigurations."${username}@luna" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      extraSpecialArgs = extraModules;
-      modules = [ ./luna.nix ];
+      extraSpecialArgs = extraModules // {hostname = "luna";};
+      modules = [./luna.nix];
     };
 
     homeConfigurations."${username}@janus" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      extraSpecialArgs = extraModules;
-      modules = [ ./janus.nix ];
+      extraSpecialArgs = extraModules // {hostname = "janus";};
+      modules = [./janus.nix];
     };
   };
 }

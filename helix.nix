@@ -29,6 +29,13 @@ in {
           };
         }
         {
+          name = "c";
+          indent = {
+            tab-width = 4;
+            unit = "\t";
+          };
+        }
+        {
           name = "verilog";
           language-servers = ["svls"];
         }
@@ -42,12 +49,16 @@ in {
         }
       ];
 
-      language-server.typst-lsp = {
-        command = "typst-lsp";
-        config.exportPdf = "never";
+      language-server = {
+        typst-lsp = {
+          command = "typst-lsp";
+          config.exportPdf = "never";
+        };
+        svls.command = "svls";
+        rust-analyzer.config = {
+          check.allTargets = false;
+        };
       };
-
-      language-server.svls.command = "svls";
     };
     "helix/config.toml".text = std.serde.toTOML {
       theme = "catppuccin_mocha";

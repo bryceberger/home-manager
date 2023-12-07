@@ -1,4 +1,7 @@
-{pkgs}: let
+{
+  pkgs,
+  hostname,
+}: let
   backlight = "${pkgs.brightnessctl}/bin/brightnessctl";
   volume = "${pkgs.wireplumber}/bin/wpctl";
   media = "${pkgs.playerctl}/bin/playerctl";
@@ -50,11 +53,18 @@ in {
 
       # brightness
       "     , XF86MonBrightnessDown, exec, ${backlight} s 10%-"
-      "     , F7                   , exec, ${backlight} s 10%-"
       "     , XF86MonBrightnessUp  , exec, ${backlight} s 10%+"
-      "     , F8                   , exec, ${backlight} s 10%+"
-      "SUPER, space                , exec, kbdbacklighttoggle"
-
+    ]
+    ++ (
+      if hostname == "luna"
+      then [
+        "     , F7                   , exec, ${backlight} s 10%-"
+        "     , F8                   , exec, ${backlight} s 10%+"
+        "SUPER, space                , exec, kbdbacklighttoggle"
+      ]
+      else []
+    )
+    ++ [
       # audio / media
       # TODO: what package is wpctl in?
       ", XF86AudioRaiseVolume, exec, ${volume} set-volume @DEFAULT_SINK@ 5%+"

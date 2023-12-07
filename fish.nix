@@ -58,6 +58,7 @@
     interactiveShellInit = ''
       set fish_greeting # disable greeting
       export GPG_TTY=$(tty)
+      export NIX_AUTO_RUN=1
       ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
     '';
 
