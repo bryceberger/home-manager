@@ -23,6 +23,10 @@
 
   dwindle = {
     no_gaps_when_only = true;
+    special_scale_factor = 0.8;
+  };
+  master = {
+    special_scale_factor = 0.8;
   };
 
   animations = {

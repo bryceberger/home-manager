@@ -58,7 +58,6 @@
     interactiveShellInit = ''
       set fish_greeting # disable greeting
       export GPG_TTY=$(tty)
-      export NIX_AUTO_RUN=1
       ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
     '';
 
@@ -87,9 +86,11 @@
       "gh" = "git log --oneline --graph --all -n 20";
       "gd" = "git difftool --dir-diff";
       "c" = "cargo";
+      "j" = "just";
       "nd" = "nix develop -c fish";
       "pbuds" = "bluetoothctl connect 24:29:34:9C:5D:8D";
       "nr" = "nix_remote";
+      "ns" = "nix shell";
     };
 
     shellAliases = {

@@ -123,7 +123,7 @@ in {
         };
 
         temperature = {
-          hwmon-path = "/sys/class/hwmon/hwmon2/temp1_input";
+          hwmon-path = "/sys/class/hwmon/hwmon6/temp1_input";
           format = "{temperatureC}°C";
           format-alt = "{temperatureF}°F";
         };

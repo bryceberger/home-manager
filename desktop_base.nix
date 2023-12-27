@@ -11,6 +11,7 @@
 
     # standalone
     firefox
+    thunderbird
     zathura
 
     # sound

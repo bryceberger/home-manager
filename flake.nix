@@ -1,13 +1,16 @@
 {
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
-    nix-std.url = "github:chessai/nix-std";
+    nixpkgs.url = "nixpkgs";
+    home-manager = {
+      url = "home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    # for pinning transitive deps
+    nix-std.url = "github:chessai/nix-std";
     flake-utils.url = "github:numtide/flake-utils";
 
-    home-manager = {
-      url = "github:nix-community/home-manager";
+    nix-index-database = {
+      url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -26,6 +29,7 @@
         utils.follows = "flake-utils";
       };
     };
+
     calc = {
       url = "path:/home/bryce/todo-riir/unit-calculator";
       inputs = {
@@ -39,6 +43,7 @@
     nixpkgs,
     nix-std,
     home-manager,
+    nix-index-database,
     helix,
     power-graphing,
     calc,
@@ -49,19 +54,24 @@
 
     username = "bryce";
     extraModules = {inherit nix-std system helix power-graphing calc;};
+
+    nix-index = [
+      nix-index-database.hmModules.nix-index
+      {programs.nix-index-database.comma.enable = true;}
+    ];
   in {
     formatter.${system} = pkgs.alejandra;
 
     homeConfigurations."${username}@luna" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       extraSpecialArgs = extraModules // {hostname = "luna";};
-      modules = [./luna.nix];
+      modules = [./luna.nix] ++ nix-index;
     };
 
     homeConfigurations."${username}@janus" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       extraSpecialArgs = extraModules // {hostname = "janus";};
-      modules = [./janus.nix];
+      modules = [./janus.nix] ++ nix-index;
     };
   };
 }
