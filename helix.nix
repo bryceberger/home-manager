@@ -36,16 +36,37 @@ in {
           };
         }
         {
+          name = "java";
+          indent = {
+            tab-width = 4;
+            unit = "    ";
+          };
+        }
+        {
           name = "verilog";
           language-servers = ["svls"];
+          formatter = {
+            command = "verible-verilog-format";
+            args = ["-"];
+          };
         }
         {
           name = "nix";
-          auto-format = true;
           formatter = {
             command = "alejandra";
             args = ["-q"];
           };
+        }
+        {
+          name = "veryl";
+          file-types = ["vl"];
+          scope = "source.veryl";
+          comment-token = "//";
+          indent = {
+            tab-width = 4;
+            unit = "    ";
+          };
+          language-servers = ["veryl-ls"];
         }
       ];
 
@@ -57,6 +78,9 @@ in {
         svls.command = "svls";
         rust-analyzer.config = {
           check.allTargets = false;
+        };
+        veryl-ls = {
+          command = "veryl-ls";
         };
       };
     };

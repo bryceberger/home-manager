@@ -29,7 +29,6 @@
     calibre
     citra-nightly
     libnotify
-    retroarchFull
     waypipe
     yuzu
   ];
