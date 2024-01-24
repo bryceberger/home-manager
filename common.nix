@@ -3,6 +3,12 @@
     EDITOR = "hx";
   };
   xdg.configFile = {
+    "user-dirs.conf" = {
+      enable = true;
+      text = ''
+        enabled=false
+      '';
+    };
     "user-dirs.dirs" = {
       enable = true;
       text = ''

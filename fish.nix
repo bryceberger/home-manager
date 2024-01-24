@@ -6,6 +6,10 @@
 
   home.packages = with pkgs; [
     grc # colors
+    rm-improved
+    zoxide
+    fzf
+    ouch
     lsd
     ripgrep
     fend
@@ -14,6 +18,10 @@
     # to not have to run fish again after nix-shell
     any-nix-shell
   ];
+
+  programs.zoxide = {
+    enable = true;
+  };
 
   programs.direnv = {
     enable = true;
