@@ -16,6 +16,7 @@
       {
         misc = {
           disable_hyprland_logo = true;
+          disable_splash_rendering = true;
         };
       }
       // import ./hyprland/decoration.nix {}
@@ -51,6 +52,7 @@
     "hypr/hyprpaper.conf".text = ''
       preload   =   ${wallpaperFile}
       wallpaper = , ${wallpaperFile}
+      splash    = false
     '';
   };
 
@@ -58,6 +60,10 @@
     hyprpaper
     (writeShellScriptBin "screenshot" ''
       ${grim}/bin/grim -g "$(${slurp}/bin/slurp)" - | ${wl-clipboard}/bin/wl-copy
+    '')
+    (writeShellScriptBin "screenshot-window" ''
+      set -e
+      grim -g "$(hyprctl clients -j | jq -r '.[] | select(.hidden == false) | {pos: .at, size, title} | "\(.pos[0]?),\(.pos[1]?) \(.size[0]?)x\(.size[1]?) \(.title)"' | slurp)" - | wl-copy
     '')
   ];
 }

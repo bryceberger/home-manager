@@ -1,7 +1,6 @@
 {
   pkgs,
   power-graphing,
-  calc,
   system,
   ...
 }: {
@@ -37,7 +36,6 @@
     libnotify
     mpv
     yt-dlp
-    calc.packages.${system}.default
     power-graphing.packages.${system}.default
     (writeShellScriptBin "nix_remote" ''
       remote=ssh-ng://janus

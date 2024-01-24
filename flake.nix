@@ -29,14 +29,6 @@
         utils.follows = "flake-utils";
       };
     };
-
-    calc = {
-      url = "path:/home/bryce/todo-riir/unit-calculator";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-utils.follows = "flake-utils";
-      };
-    };
   };
 
   outputs = {
@@ -46,14 +38,13 @@
     nix-index-database,
     helix,
     power-graphing,
-    calc,
     ...
   }: let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
 
     username = "bryce";
-    extraModules = {inherit nix-std system helix power-graphing calc;};
+    extraModules = {inherit nix-std system helix power-graphing;};
 
     nix-index = [
       nix-index-database.hmModules.nix-index

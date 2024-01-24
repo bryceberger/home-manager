@@ -7,8 +7,8 @@
     ]
     else if hostname == "luna"
     then [
-      "eDP-1, 2560x1600@60Hz, 0x0 , 1.5"
-      "eDP-2, 2560x1600@60Hz, 0x0 , 1.5"
+      "eDP-1, 2560x1600@60Hz, 0x0 , 1.6"
+      "eDP-2, 2560x1600@60Hz, 0x0 , 1.6"
       "     , preferred     , auto, 1"
     ]
     else [

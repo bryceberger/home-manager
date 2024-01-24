@@ -8,9 +8,10 @@
 in {
   bind = with pkgs;
     [
-      "SUPER     , M     , exit, "
-      "SUPER     , Escape, exec, lock"
-      "SUPERSHIFT, S     , exec, screenshot"
+      "SUPER         , M     , exit, "
+      "SUPER         , Escape, exec, lock"
+      "SUPERSHIFT    , S     , exec, screenshot"
+      "CTRLSUPERSHIFT, S     , exec, screenshot-window"
     ]
     # movement
     ++ builtins.concatLists (
@@ -36,7 +37,6 @@ in {
       "CTRLSHIFT, j     , resizeactive   , 0 20"
       "         , F2    , movetoworkspace, special"
       "         , F2    , togglespecialworkspace"
-      "ALT      , 3     , togglespecialworkspace"
       "         , F1    , togglespecialworkspace"
       "ALT      , 0x0060, togglegroup"
       "ALT      , 0xff09, changegroupactive"

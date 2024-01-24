@@ -4,6 +4,9 @@
   lib,
   ...
 }: {
+  home.packages = with pkgs; [
+    difftastic
+  ];
   programs.git = {
     enable = true;
 

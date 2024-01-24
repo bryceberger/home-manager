@@ -8,6 +8,8 @@
     grc # colors
     lsd
     ripgrep
+    fend
+    fd
 
     # to not have to run fish again after nix-shell
     any-nix-shell
