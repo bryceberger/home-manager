@@ -5,6 +5,12 @@
     ""
     args;
 in {
+  home.packages = with pkgs; [
+    sccache
+  ];
+  home.sessionVariables = {
+    RUSTC_WRAPPER = "${pkgs.sccache}/bin/sccache";
+  };
   home.file = {
     ".clang-format".text = clang-format-text {
       BasedOnStyle = "Google";
