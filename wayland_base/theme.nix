@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, ...}: let
   gtk = {
     enable = true;
     theme = {
@@ -26,5 +26,14 @@
       name = "Fira Code";
       size = 12;
     };
+  };
+in {
+  inherit gtk;
+  home.file = {
+    ".icons/default/index.theme".text = ''
+      [Icon Theme]
+      Name=Default
+      Inherits=${gtk.cursorTheme.name}
+    '';
   };
 }

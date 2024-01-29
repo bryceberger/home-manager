@@ -35,7 +35,6 @@
           .package
         }/bin/waybar &
         ${hyprpaper}/bin/hyprpaper &
-        ${hyprland}/bin/hyprctl setcursor Catppuccin-Mocha-Light-Cursors 24
         ${swayidle}/bin/swayidle &
       ''}/bin/hyprland-autostart
 
